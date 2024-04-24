@@ -1,0 +1,23 @@
+user
+Tours
+Location
+
+
+Review
+Bookings
+
+
+User{
+    name
+    email
+    review:[
+
+    ],
+    bookings:[
+
+    ]
+
+}
+
+Embedding vs Referencing
+
