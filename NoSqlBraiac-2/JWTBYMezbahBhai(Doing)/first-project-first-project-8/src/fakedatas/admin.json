@@ -1,0 +1,20 @@
+{
+  "password": "secretpassword123",
+  "admin": {
+    "designation": "Admin",
+    "name": {
+      "firstName": "Jhankar",
+      "middleName": "khan",
+      "lastName": "Doe"
+    },
+    "gender": "male",
+    "dateOfBirth": "1990-05-15",
+    "email": "john.doe@example.com",
+    "contactNo": "+1234567890",
+    "emergencyContactNo": "+9876543210",
+    "bloogGroup": "A+",
+    "presentAddress": "123 Main St, Cityville",
+    "permanentAddress": "456 Oak St, Townsville",
+    "profileImg": "https://example.com/johndoe.jpg"
+  }
+}

@@ -1,0 +1,110 @@
+Ph-University
+Functinal Requirements
+1.Authentication:
+  a.Student
+           1.Student Can Login and logout
+           2.Student Can update password
+    b.Faculty
+           1.Faculty Can Login and logout
+           2.Faculty Can update password
+     c.Admin
+           1.Admin Can Login and logout
+           2.Admin Can update password
+2.Profile Mangement
+   a.Student:
+       1.Student can manage and update password
+       2.Student can update certain fields
+    b.Faculty:
+       1.Faculty can manage and update password
+       2.Faculty can update certain fields
+       c.Admin
+       1.Admin can manage and update password
+       2.Admin can update certain fields
+3.Academic Process:
+1.Student
+     a.Student can enroll their offered courses
+      b.Student can view class schedules
+      3.Student can see grades
+
+
+---------       Data Model------
+
+Student:                  
+_id
+id(generated)
+password
+name
+gender
+dateOfBirth
+email
+contactNumber
+emergencyContactNumber
+presentAddress
+permanentAddress
+guardian
+localGuardian
+profileImage
+status
+academicDepartment
+isDeleted
+createdAt
+updatedAt
+_id
+id(generated)
+password
+name
+gender
+dateOfBirth
+email
+contactNumber
+emergencyContactNumber
+presentAddress
+permanentAddress
+guardian
+localGuardian
+profileImage
+status
+academicDepartment
+isDeleted
+createdAt
+updatedAt
+
+-----
+Faculty:                  
+_id
+id(generated)
+password
+name
+gender
+dateOfBirth
+email
+contactNumber
+emergencyContactNumber
+presentAddress
+permanentAddress
+profileImage
+status
+academicDepartment
+academicFaculty
+isDeleted
+createdAt
+updatedAt
+_id
+id(generated)
+password
+name
+gender
+dateOfBirth
+email
+contactNumber
+emergencyContactNumber
+presentAddress
+permanentAddress
+guardian
+localGuardian
+profileImage
+status
+academicDepartment
+isDeleted
+createdAt
+updatedAt

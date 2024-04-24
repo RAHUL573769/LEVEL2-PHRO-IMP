@@ -1,0 +1,17 @@
+{
+  "name": "Example Tour",
+  "durationHours": 8,
+  "ratingAverage": 4.5,
+  "ratingQuantity": 10,
+  "price": 50.99,
+  "imageCover": "https://example.com/cover-image.jpg",
+  "images": [
+    "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg"
+  ],
+  "createdAt": "2023-12-14T12:00:00Z",
+  "startLocation": "City A",
+  "endLocation": "City B",
+  "locations": ["City A", "City B", "City C"],
+  "slug": "example-tour"
+}

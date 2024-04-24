@@ -1,0 +1,10 @@
+{
+  "name": "John Doe",
+  "age": 25,
+  "email": "john.doe@example.com",
+  "password": "hashed_password",
+  "passwordChangedAt": "2023-01-01T12:00:00Z",
+  "photo": "https://example.com/john_doe_photo.jpg",
+  "role": "user",
+  "userStatus": "active"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Sample Tour",
+  "durationHours": 8,
+  "ratingAverage": 4.5,
+  "ratingQuantity": 10,
+  "price": 100,
+  "imageCover": "sample_cover.jpg",
+  "images": ["image1.jpg", "image2.jpg", "image3.jpg"],
+  "createdAt": "2023-01-01T12:00:00.000Z",
+  "startDates": ["2023-02-01T10:00:00.000Z", "2023-03-01T10:00:00.000Z"],
+  "startLocation": "Sample City",
+  "availableSeats": 20,
+  "locations": ["Location1", "Location2", "Location3"],
+  "slug": "sample-tour"
+}

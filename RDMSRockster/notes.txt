@@ -1,0 +1,30 @@
+What is a Database?
+A Database is a structured collection of related data that represents
+real world entities
+
+--->Structured collection of related data that represents
+real world entities and are organized for efficient etrieval,storage
+
+What is Information?
+Information is processed data
+
+What is DBMS?
+Database Management System
+
+Storing data using File System
+1.Unstructured data,multiple formats
+2.Data re-dundency
+3.Security issue
+
+
+To avoid all problems we use DBMS
+
+We use dbms
+
+Different types of Database Models:
+1.Hierarchy Models
+2.Network Model
+3.Relational Model
+4.Document Model
+
+Anatomy of Table/Relation:

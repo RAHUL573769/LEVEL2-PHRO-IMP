@@ -1,0 +1,23 @@
+{
+  "password": "1324",
+
+  "student": {
+    "id": "909",
+    "user": "132424",
+    "name": {
+      "firstName": "Rahul",
+      "middleName": "BIkash",
+      "lastName": "Rudra"
+    },
+    "gender": "Male",
+    " bloodGroup": "a-",
+    "emergencyContactNumber": "234",
+    "presentAddress": "24253",
+    "permanentAddress": "3534643",
+    "  guardian": "fafawf",
+    "localGuardian": "2435",
+    "profileImage": "fesf.png",
+    "  academicDepartment": "65719a3db0f8f69f456b1091",
+    " isDeleted": true
+  }
+}

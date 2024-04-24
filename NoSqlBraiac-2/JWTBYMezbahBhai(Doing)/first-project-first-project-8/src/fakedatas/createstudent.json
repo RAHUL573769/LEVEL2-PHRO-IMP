@@ -1,0 +1,35 @@
+{
+  "password": "secretpassword123",
+  "student": {
+    "name": {
+      "firstName": "Alice",
+      "middleName": "M",
+      "lastName": "Johnson"
+    },
+    "gender": "female",
+    "dateOfBirth": "1995-08-20",
+    "email": "alice.johnson@example.com",
+    "contactNo": "+1234567890",
+    "emergencyContactNo": "+9876543210",
+    "bloogGroup": "A+",
+    "presentAddress": "456 Oak St, Townsville",
+    "permanentAddress": "123 Main St, Cityville",
+    "guardian": {
+      "fatherName": "John Johnson",
+      "fatherOccupation": "Engineer",
+      "fatherContactNo": "+1111111111",
+      "motherName": "Mary Johnson",
+      "motherOccupation": "Doctor",
+      "motherContactNo": "+2222222222"
+    },
+    "localGuardian": {
+      "name": "Bob Smith",
+      "occupation": "Businessman",
+      "contactNo": "+3333333333",
+      "address": "789 Pine St, Villagetown"
+    },
+    "admissionSemester": "5f59a859b4e303001fd8e27a",
+    "profileImg": "https://example.com/alice.jpg",
+    "academicDepartment": "5f59a861b4e303001fd8e27b"
+  }
+}

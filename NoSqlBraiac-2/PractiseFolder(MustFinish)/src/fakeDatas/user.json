@@ -1,0 +1,9 @@
+{
+  "id": "user123",
+  "password": "hashedpassword123",
+  "needsPasswordChange": false,
+  "role": "admin",
+  "status": "active",
+  "createdAt": "2023-01-01T12:00:00Z",
+  "updatedAt": "2023-01-02T15:30:00Z"
+}

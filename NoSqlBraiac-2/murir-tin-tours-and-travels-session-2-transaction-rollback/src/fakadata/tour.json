@@ -1,0 +1,15 @@
+{
+  "name": "Adventure Trek",
+  "durationHours": 10,
+  "ratingAverage": 4.8,
+  "ratingQuantity": 120,
+  "price": 299.99,
+  "imageCover": "adventure-trek-cover.jpg",
+  "images": ["image1.jpg", "image2.jpg", "image3.jpg"],
+  "createdAt": "2023-01-15T08:00:00.000Z",
+  "startDates": ["2023-02-01", "2023-03-01", "2023-04-01"],
+  "startLocation": "Mountain Base Camp",
+  "availableSeats": 20,
+  "locations": ["Mountain Summit", "Valley View", "River Crossing"],
+  "slug": "adventure-trek"
+}

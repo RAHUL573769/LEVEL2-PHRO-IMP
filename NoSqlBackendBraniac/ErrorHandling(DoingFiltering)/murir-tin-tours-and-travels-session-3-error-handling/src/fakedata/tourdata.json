@@ -1,0 +1,15 @@
+{
+  "name": "Jungle Trekking Adventure",
+  "durationHours": 8,
+  "ratingAverage": 4.7,
+  "ratingQuantity": 42,
+  "price": 150,
+  "availableSeats": 15,
+  "imageCover": "jungle_trekking.jpg",
+  "images": ["jungle1.jpg", "jungle2.jpg", "jungle3.jpg"],
+  "createdAt": "2024-04-06T12:00:00Z",
+  "startDates": ["2024-05-20", "2024-06-15", "2024-07-05"],
+  "startLocation": "Jungle Lodge",
+  "locations": ["Deep Forest", "River Rapids", "Waterfall Viewpoint"],
+  "slug": "jungle-trekking-adventure"
+}
