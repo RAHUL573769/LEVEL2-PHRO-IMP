@@ -127,10 +127,41 @@ const getSingleCourseFromDB = async (id: string) => {
 const updateCourseIntoDB=async(id:string,payload:Partial<TCourse>)=>{
 
 
-
+// console.log(payload)
 
 const{preRequisiteCourses,...courseRemainingData}=payload
 const updatedBasiCourseInfo=await Course.findByIdAndUpdate(id,courseRemainingData,{new:true,runValidators:true})
+
+//check if there any pre requisite curses
+if(preRequisiteCourses&&preRequisiteCourses.length>0){
+
+
+  const deletedPreRequisite=preRequisiteCourses.filter(el=>el.course&&el.isDeleted).map(el=>el.course)
+
+const deletedPreRequisiteCourses=await Course.findByIdAndUpdate(id,{
+  $pull:{preRequisiteCourses:{course:{$in:deletedPreRequisite}}}
+})
+
+
+const newPreRequisites=preRequisiteCourses.filter(el=>el.course&&!el.isDeleted)
+
+
+
+const newPreRequisiteCourses=await Course.findByIdAndUpdate({
+
+  id,
+
+})
+
+
+
+// console.log(newPreRequisiteCourses)
+
+  // console.log(deletedPreRequisiteCourses)
+
+
+
+}
 
 return updatedBasiCourseInfo
 

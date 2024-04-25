@@ -8,6 +8,8 @@ const express_1 = __importDefault(require("express"));
 const Admin_controller_1 = require("./Admin.controller");
 const valdateRequest_1 = require("../../helpers/valdateRequest");
 const admin_validation_1 = require("./admin.validation");
+const auth_1 = require("../../middlewares/auth");
+const client_1 = require("@prisma/client");
 // const validateRequest = (schema: ZodSchema) => {
 //   return async (req: Request, res: Response, next: NextFunction) => {
 //     try {
@@ -19,10 +21,10 @@ const admin_validation_1 = require("./admin.validation");
 //   };
 // };
 const router = express_1.default.Router();
-router.get("/get-admin/:id", Admin_controller_1.AdminController.getByIdFromDb);
+router.get("/get-admin/:id", (0, auth_1.auth)(client_1.UsersRole.ADMIN, client_1.UsersRole.SUPER_ADMIN), Admin_controller_1.AdminController.getByIdFromDb);
 router.patch("/update-admin/:id", (0, valdateRequest_1.validateRequest)(admin_validation_1.update), Admin_controller_1.AdminController.updateDataInDb);
-router.delete("/delete-admin/:id", Admin_controller_1.AdminController.deleteData);
-router.delete("/soft-delete-admin/:id", Admin_controller_1.AdminController.softdeleteData);
-router.get("/get-admin", Admin_controller_1.AdminController.getAdminController);
-router.get("/get-single", Admin_controller_1.AdminController.getSingleAdminController);
+router.delete("/delete-admin/:id", (0, auth_1.auth)(client_1.UsersRole.ADMIN, client_1.UsersRole.SUPER_ADMIN), Admin_controller_1.AdminController.deleteData);
+router.delete("/soft-delete-admin/:id", (0, auth_1.auth)(client_1.UsersRole.ADMIN, client_1.UsersRole.SUPER_ADMIN), Admin_controller_1.AdminController.softdeleteData);
+router.get("/get-admin", (0, auth_1.auth)(client_1.UsersRole.ADMIN, client_1.UsersRole.SUPER_ADMIN), Admin_controller_1.AdminController.getAdminController);
+router.get("/get-single", (0, auth_1.auth)(client_1.UsersRole.ADMIN, client_1.UsersRole.SUPER_ADMIN), Admin_controller_1.AdminController.getSingleAdminController);
 exports.AdminRoute = router;

@@ -100,7 +100,7 @@ const refreshToken = async (token: string) => {
   }
 };
 
-const changePassword = async (user, payload) => {
+const changePassword = async (user: { email: any; }, payload: { oldPassword: string | Buffer; newPassword: string | Buffer; }) => {
   const userData = await prisma.user.findFirstOrThrow({
     where: {
       email: user.email
