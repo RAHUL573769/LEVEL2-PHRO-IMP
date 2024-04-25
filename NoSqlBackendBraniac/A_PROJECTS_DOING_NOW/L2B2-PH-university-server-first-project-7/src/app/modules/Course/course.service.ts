@@ -149,7 +149,7 @@ const newPreRequisites=preRequisiteCourses.filter(el=>el.course&&!el.isDeleted)
 
 const newPreRequisiteCourses=await Course.findByIdAndUpdate({
 
-  id,
+  id
 
 })
 

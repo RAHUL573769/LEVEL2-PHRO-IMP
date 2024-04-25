@@ -31,24 +31,35 @@ const userRouter = express.Router();
 //     }
 //   };
 // };
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    // cb(null, "/uploads");
-    cb(null, path.join(process.cwd(), "uploads"));
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.originalname);
-  }
-});
+//multer part
+// const storage = multer.diskStorage({
+// 	destination: function (req, file, cb) {
+// 		// cb(null, "/uploads");
+// 		cb(null, path.join(process.cwd(), "uploads"));
+// 	},
+// 	filename: function (req, file, cb) {
+// 		const uniueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+// 		cb(null, file.originalname);
+// 	},
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+//multer part
+
+import { upload } from "../../helpers/fileUploader";
+import { UserValidation } from "./user.validation";
 
 userRouter.get("/get-user", UserController.createAdminController);
 userRouter.post(
-  "/create-user", // auth("ADMIN", "SUPER_ADMIN"),
-  // auth(UsersRole.ADMIN),
-  upload.single("file"), //must send as file from postman
-  UserController.createAdminController
+	"/create-user", // auth("ADMIN", "SUPER_ADMIN"),
+	// auth(UsersRole.ADMIN),
+	upload.single("file"), //must send as file from postman
+
+	(req: Request, res: Response, next: NextFunction) => {
+		req.body = UserValidation.createAdmin.parse(JSON.parse(req.body.data));
+		return UserController.createAdminController(req, res, next);
+	},
+
+	UserController.createAdminController
 );
 export const UserRouter = userRouter;
