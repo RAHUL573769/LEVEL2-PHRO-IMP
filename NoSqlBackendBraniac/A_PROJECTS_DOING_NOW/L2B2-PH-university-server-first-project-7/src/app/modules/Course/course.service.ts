@@ -10,7 +10,11 @@ const createCourseIntoDB = async (payload: TCourse) => {
   const result = await Course.create(payload);
   return result;
 };
-
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+// const createCourseIntoDB=async(payload:TCourse)=>{
+//   const result=await Course.create(   )
+//   return result
+// }
 const getAllCoursesFromDB = async (query: Record<string, unknown>) => {
   const courseQuery = new QueryBuilder(
     Course.find(),
