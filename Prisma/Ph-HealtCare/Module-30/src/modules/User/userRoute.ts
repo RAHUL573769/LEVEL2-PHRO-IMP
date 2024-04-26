@@ -1,12 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
 import { UserController } from "./user.controller";
-import { verifyToken } from "../../helpers/jwtHelpers";
-import config from "../../config";
-import { Secret } from "jsonwebtoken";
-import { auth } from "../../middlewares/auth";
-import { UsersRole } from "@prisma/client";
+
 import multer from "multer";
 import path from "path";
+import { upload } from "../../helpers/fileUploader";
 const userRouter = express.Router();
 
 // const auth = (...roles: string[]) => {
@@ -34,20 +31,15 @@ const userRouter = express.Router();
 //multer part
 // const storage = multer.diskStorage({
 // 	destination: function (req, file, cb) {
-// 		// cb(null, "/uploads");
 // 		cb(null, path.join(process.cwd(), "uploads"));
 // 	},
 // 	filename: function (req, file, cb) {
-// 		const uniueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-// 		cb(null, file.originalname);
+// 		const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+// 		cb(null, file.fieldname + "-" + uniqueSuffix);
 // 	},
 // });
 
 // const upload = multer({ storage: storage });
-//multer part
-
-import { upload } from "../../helpers/fileUploader";
-import { UserValidation } from "./user.validation";
 
 userRouter.get("/get-user", UserController.createAdminController);
 userRouter.post(
@@ -55,10 +47,10 @@ userRouter.post(
 	// auth(UsersRole.ADMIN),
 	upload.single("file"), //must send as file from postman
 
-	(req: Request, res: Response, next: NextFunction) => {
-		req.body = UserValidation.createAdmin.parse(JSON.parse(req.body.data));
-		return UserController.createAdminController(req, res, next);
-	},
+	// (req: Request, res: Response, next: NextFunction) => {
+	// 	req.body = UserValidation.createAdmin.parse(JSON.parse(req.body.data));
+	// 	return UserController.createAdminController(req, res, next);
+	// },
 
 	UserController.createAdminController
 );

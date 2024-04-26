@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
@@ -6,7 +7,8 @@ import CreateStudent from "../pages/admin/CreateStudent";
 export const adminPath2 = [
 	{
 		name: "Dashboard",
-		path: "/admin/dashboard",
+		path: "dashboard",
+		// path: "/admin/dashboard",
 		element: <AdminDashboard></AdminDashboard>,
 	},
 	{
@@ -14,17 +16,20 @@ export const adminPath2 = [
 		children: [
 			{
 				name: "Create Admin",
-				path: "/admin/create-admin",
+				path: "create-admin",
+				// path: "/admin/create-admin",
 				element: <CreateAdmin></CreateAdmin>,
 			},
 			{
 				name: "Create Faculty",
-				path: "/admin/create-Faculty",
+				path: "create-Faculty",
+				// path: "/admin/create-Faculty",
 				element: <CreateFaculty></CreateFaculty>,
 			},
 			{
 				name: "Create Student",
-				path: "/admin/create-student",
+				path: "create-student",
+				// path: "/admin/create-student",
 				element: <CreateStudent></CreateStudent>,
 			},
 		],
@@ -50,8 +55,11 @@ export const adminPaths = [
 		element: <CreateFaculty></CreateFaculty>,
 	},
 ];
-
-export const adminRoutes = adminPaths.reduce((acc, item) => {
+type TRoute = {
+	path: string;
+	element: ReactNode;
+};
+export const adminRoutes = adminPath2.reduce((acc: TRoute[], item) => {
 	// acc.push(item);
 	// return acc;
 	// console.log(item);

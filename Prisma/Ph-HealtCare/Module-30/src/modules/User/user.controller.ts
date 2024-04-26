@@ -10,7 +10,7 @@ const createAdminController = catchAsync(
 
 		// const result = await UserService.createAdmin(req.body);
 		const result = await UserService.createAdmin(req);
-		console.log("Result", result);
+		// console.log("Result", result);
 		sendResponse(res, {
 			statusCode: 200,
 			success: true,
