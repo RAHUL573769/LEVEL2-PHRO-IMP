@@ -5,7 +5,7 @@ import { CourseServices } from './course.service';
 
 const createCourse = catchAsync(async (req, res) => {
   const result = await CourseServices.createCourseIntoDB(req.body);
-console.log(result)
+  console.log(result);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -40,7 +40,7 @@ const getSingleCourse = catchAsync(async (req, res) => {
 const updateCourse = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await CourseServices.updateCourseIntoDB(id, req.body);
-
+  console.log(result);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

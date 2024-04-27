@@ -19,8 +19,7 @@ const createCourseIntoDB = async (payload: TCourse) => {
 // }
 const getAllCoursesFromDB = async (query: Record<string, unknown>) => {
   const courseQuery = new QueryBuilder(
-    Course.find()
-    .populate('preRequisiteCourses.course'),
+    Course.find().populate('preRequisiteCourses.course'),
     query,
   )
     .search(CourseSearchableFields)
@@ -124,49 +123,42 @@ const getSingleCourseFromDB = async (id: string) => {
 //   }
 // };
 // eslint-disable-next-line no-unused-vars
-const updateCourseIntoDB=async(id:string,payload:Partial<TCourse>)=>{
+const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
+  // console.log(payload)
 
+  const { preRequisiteCourses, ...courseRemainingData } = payload;
+  const updatedBasiCourseInfo = await Course.findByIdAndUpdate(
+    id,
+    courseRemainingData,
+    { new: true, runValidators: true },
+  );
 
-// console.log(payload)
+  //check if there any pre requisite curses
+  console.log(preRequisiteCourses);
+  if (preRequisiteCourses && preRequisiteCourses.length > 0) {
+    const deletedPreRequisite = preRequisiteCourses
+      .filter((el) => el.course && el.isDeleted)
+      .map((el) => el.course);
+    // console.log(deletedPreRequisite);
+    const deletedPreRequisiteCourses = await Course.findByIdAndUpdate(id, {
+      $pull: { preRequisiteCourses: { course: { $in: deletedPreRequisite } } },
+    });
 
-const{preRequisiteCourses,...courseRemainingData}=payload
-const updatedBasiCourseInfo=await Course.findByIdAndUpdate(id,courseRemainingData,{new:true,runValidators:true})
+    const newPreRequisites = preRequisiteCourses.filter(
+      (el) => el.course && !el.isDeleted,
+    );
 
-//check if there any pre requisite curses
-if(preRequisiteCourses&&preRequisiteCourses.length>0){
+    const newPreRequisiteCourses = await Course.findByIdAndUpdate({
+      id,
+    });
 
+    // console.log(newPreRequisiteCourses)
 
-  const deletedPreRequisite=preRequisiteCourses.filter(el=>el.course&&el.isDeleted).map(el=>el.course)
+    // console.log(deletedPreRequisiteCourses)
+  }
 
-const deletedPreRequisiteCourses=await Course.findByIdAndUpdate(id,{
-  $pull:{preRequisiteCourses:{course:{$in:deletedPreRequisite}}}
-})
-
-
-const newPreRequisites=preRequisiteCourses.filter(el=>el.course&&!el.isDeleted)
-
-
-
-const newPreRequisiteCourses=await Course.findByIdAndUpdate({
-
-  id
-
-})
-
-
-
-// console.log(newPreRequisiteCourses)
-
-  // console.log(deletedPreRequisiteCourses)
-
-
-
-}
-
-return updatedBasiCourseInfo
-
-
-}
+  return updatedBasiCourseInfo;
+};
 const deleteCourseFromDB = async (id: string) => {
   const result = await Course.findByIdAndUpdate(
     id,
