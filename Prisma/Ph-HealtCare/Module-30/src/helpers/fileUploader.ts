@@ -1,7 +1,9 @@
 import multer from "multer";
-import path from "path";
-import { v2 as cloudinary } from "cloudinary";
 
+import { v2 as cloudinary } from "cloudinary";
+import { ICloudinaryResponse, IFile } from "../types/filetypes";
+import path from "path";
+import fs from "fs";
 cloudinary.config({
 	cloud_name: "dcgc00swy",
 	api_key: "317231526124669",
@@ -19,8 +21,8 @@ const storage = multer.diskStorage({
 	},
 });
 export const upload = multer({ storage: storage });
-const uploadToCloudinary = (file: any) => {
-	// console.log("Filess", file);
+const uploadToCloudinary = (file: IFile) => {
+	console.log("Filess", file);
 
 	return new Promise((resolve, reject) => {
 		cloudinary.uploader.upload(
@@ -34,6 +36,7 @@ const uploadToCloudinary = (file: any) => {
 			(error, result) => {
 				if (error) {
 					reject(error);
+					console.log(error);
 				} else {
 					resolve(result);
 				}
@@ -45,4 +48,23 @@ const uploadToCloudinary = (file: any) => {
 		);
 	});
 };
+
+// const uploadToCloudinary = async (
+// 	file: IFile
+// ): Promise<ICloudinaryResponse | undefined> => {
+// 	return new Promise((resolve, reject) => {
+// 		cloudinary.uploader.upload(
+// 			file.path,
+// 			(error: Error, result: ICloudinaryResponse) => {
+// 				fs.unlinkSync(file.path);
+// 				if (error) {
+// 					reject(error);
+// 				} else {
+// 					resolve(result);
+// 				}
+// 			}
+// 		);
+// 	});
+// };
+
 export const fileUploader = { uploadToCloudinary };
