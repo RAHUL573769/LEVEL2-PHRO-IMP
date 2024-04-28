@@ -6,7 +6,7 @@ import { IFile } from "../../types/filetypes";
 const createAdmin = async (req: any) => {
 	const prisma = new PrismaClient();
 	console.log("File From User Services", req.file);
-	// console.log("Data From User Services", data);
+	console.log("Data From User Services", req.body);
 
 	const file = req.file;
 	// console.log("Files", file);

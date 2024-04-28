@@ -1,70 +1,45 @@
 import multer from "multer";
-
-import { v2 as cloudinary } from "cloudinary";
-import { ICloudinaryResponse, IFile } from "../types/filetypes";
 import path from "path";
 import fs from "fs";
+import { v2 as cloudinary } from "cloudinary";
+import { ICloudinaryResponse, IFile } from "../types/filetypes";
+
 cloudinary.config({
-	cloud_name: "dcgc00swy",
-	api_key: "317231526124669",
-	api_secret: "fuEkfnrkZtSVbOvJN48uiKtRayk",
+	cloud_name: "dbgrq28js",
+	api_key: "173484379744282",
+	api_secret: "eHKsVTxIOLl5oaO_BHxBQWAK3GA",
 });
+
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, path.join(process.cwd(), "uploads"));
 	},
 	filename: function (req, file, cb) {
-		// const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-		// cb(null, file.fieldname + "-" + uniqueSuffix);
-
 		cb(null, file.originalname);
 	},
 });
-export const upload = multer({ storage: storage });
-const uploadToCloudinary = (file: IFile) => {
-	console.log("Filess", file);
 
+const upload = multer({ storage: storage });
+
+const uploadToCloudinary = async (
+	file: IFile
+): Promise<ICloudinaryResponse | undefined> => {
 	return new Promise((resolve, reject) => {
 		cloudinary.uploader.upload(
-			// "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-
 			file.path,
-			// "F:\\A_LEVEL2IMP\\Prisma\\Ph-HealtCare\\Module-30\\uploads\\1566396610444.jpg",
-
-			{ public_id: file.originalname },
-
-			(error, result) => {
+			(error: Error, result: ICloudinaryResponse) => {
+				fs.unlinkSync(file.path);
 				if (error) {
 					reject(error);
-					console.log(error);
 				} else {
 					resolve(result);
 				}
 			}
-			// { public_id: "olympic_flag" },
-			// function (error, result) {
-			// 	console.log(result);
-			// }
 		);
 	});
 };
 
-// const uploadToCloudinary = async (
-// 	file: IFile
-// ): Promise<ICloudinaryResponse | undefined> => {
-// 	return new Promise((resolve, reject) => {
-// 		cloudinary.uploader.upload(
-// 			file.path,
-// 			(error: Error, result: ICloudinaryResponse) => {
-// 				fs.unlinkSync(file.path);
-// 				if (error) {
-// 					reject(error);
-// 				} else {
-// 					resolve(result);
-// 				}
-// 			}
-// 		);
-// 	});
-// };
-
-export const fileUploader = { uploadToCloudinary };
+export const fileUploader = {
+	upload,
+	uploadToCloudinary,
+};

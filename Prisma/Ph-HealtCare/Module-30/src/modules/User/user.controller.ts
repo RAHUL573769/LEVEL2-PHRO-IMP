@@ -5,7 +5,7 @@ import { catchAsync } from "../../helpers/catchAsyncHelpers";
 
 const createAdminController = catchAsync(
 	async (req: Request, res: Response, next: NextFunction) => {
-		// console.log("File From User Controller", req.file);
+		console.log("File From User Controller", req.file);
 		// console.log("Data From User Controller", req.body.data);
 
 		// const result = await UserService.createAdmin(req.body);

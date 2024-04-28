@@ -49,6 +49,16 @@ router.post(
 );
 
 router.patch(
+	"/update-my-profile",
+	fileUploader.upload.single("file"),
+	auth(UserRole.ADMIN, UserRole.DOCTOR, UserRole.SUPER_ADMIN, UserRole.PATIENT),
+	(req: Request, res: Response, next: NextFunction) => {
+		req.body = JSON.parse(req.body.data);
+		return userController.updateMyProfile(req, res, next);
+	}
+);
+
+router.patch(
 	"/:id/status",
 	auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
 	validateRequest(userValidation.updateStatus),
