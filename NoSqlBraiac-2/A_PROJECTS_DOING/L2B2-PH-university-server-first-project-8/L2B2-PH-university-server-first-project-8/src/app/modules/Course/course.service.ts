@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import QueryBuilder from '../../builder/QueryBuilder';
@@ -12,14 +10,11 @@ const createCourseIntoDB = async (payload: TCourse) => {
   const result = await Course.create(payload);
   return result;
 };
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-// const createCourseIntoDB=async(payload:TCourse)=>{
-//   const result=await Course.create(   )
-//   return result
-// }
+
 const getAllCoursesFromDB = async (query: Record<string, unknown>) => {
   const courseQuery = new QueryBuilder(
-    Course.find().populate('preRequisiteCourses.course'),
+    Course.find(),
+    // .populate('preRequisiteCourses.course'),
     query,
   )
     .search(CourseSearchableFields)
@@ -46,6 +41,7 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
 
   try {
     session.startTransaction();
+
     //step1: basic course info update
     const updatedBasicCourseInfo = await Course.findByIdAndUpdate(
       id,
@@ -58,7 +54,7 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
     );
 
     if (!updatedBasicCourseInfo) {
-      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course!');
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course');
     }
 
     // check if there is any pre requisite courses to update
@@ -83,7 +79,7 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
       );
 
       if (!deletedPreRequisiteCourses) {
-        throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course!');
+        throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course');
       }
 
       // filter out the new course fields
@@ -104,7 +100,7 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
       );
 
       if (!newPreRequisiteCourses) {
-        throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course!');
+        throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course');
       }
     }
 
@@ -117,52 +113,13 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
 
     return result;
   } catch (err) {
+    console.log(err);
     await session.abortTransaction();
     await session.endSession();
     throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course');
   }
 };
-// eslint-disable-next-line no-unused-vars
-// const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
-//   // console.log(payload)
-//   // console.log(id);
 
-//   const { preRequisiteCourses, ...courseRemainingData } = payload;
-//   // console.log(preRequisiteCourses);
-//   // console.log(courseRemainingData);
-//   const updatedBasiCourseInfo = await Course.findOneAndUpdate(
-//     { _id: id },
-//     courseRemainingData,
-//     { new: true, runValidators: true },
-//   );
-//   console.log(updatedBasiCourseInfo);
-
-//   //check if there any pre requisite curses
-//   // console.log(preRequisiteCourses);
-//   if (preRequisiteCourses && preRequisiteCourses.length > 0) {
-//     const deletedPreRequisite = preRequisiteCourses
-//       .filter((el) => el.course && el.isDeleted)
-//       .map((el) => el.course);
-
-//     const deletedPreRequisiteCourses = await Course.findByIdAndUpdate(id, {
-//       $pull: { preRequisiteCourses: { course: { $in: deletedPreRequisite } } },
-//     });
-//     console.log('d', deletedPreRequisiteCourses);
-//     const newPreRequisites = preRequisiteCourses.filter(
-//       (el) => el.course && !el.isDeleted,
-//     );
-
-//     const newPreRequisiteCourses = await Course.findByIdAndUpdate({
-//       id,
-//     });
-
-//     // console.log(newPreRequisiteCourses)
-
-//     // console.log(deletedPreRequisiteCourses)
-//   }
-
-//   return updatedBasiCourseInfo;
-// };
 const deleteCourseFromDB = async (id: string) => {
   const result = await Course.findByIdAndUpdate(
     id,
