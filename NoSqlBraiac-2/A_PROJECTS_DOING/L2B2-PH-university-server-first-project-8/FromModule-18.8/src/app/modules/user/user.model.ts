@@ -70,5 +70,11 @@ userSchema.statics.isPasswordMatch = async function (
 userSchema.statics.isJwtIssuesBeforePasswordChange = function (
   passwordChangeTimeStamp: Date,
   jwtIssueTimeStamp: number,
-) {};
+) {
+  const passwordChangedTime =
+    new Date(passwordChangeTimeStamp).getTime() / 1000;
+  return passwordChangedTime > jwtIssueTimeStamp;
+  console.log(passwordChangedTime);
+  console.log(jwtIssueTimeStamp);
+};
 export const User = model<TUser, UserModel>('User', userSchema);

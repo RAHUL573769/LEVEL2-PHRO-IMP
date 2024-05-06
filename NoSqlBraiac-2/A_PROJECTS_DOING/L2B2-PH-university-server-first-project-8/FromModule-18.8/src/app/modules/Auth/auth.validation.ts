@@ -11,7 +11,6 @@ const loginValidation = z.object({
 const changePasswordValidation = z.object({
   id: z.object({
     oldPassword: z.string({ required_error: 'Old Password is Required' }),
-
     newPassword: z.string({ required_error: 'Password is Required' }),
   }),
 });

@@ -12,6 +12,7 @@ import { TLoginUser } from './auth.interface';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import bcrypt from 'bcrypt';
 import config from '../../config';
+import { createToken } from './auth.utils';
 const loginUser = async (payload: TLoginUser) => {
   //   console.log(payload);
   //checking if user exists
@@ -59,7 +60,7 @@ const loginUser = async (payload: TLoginUser) => {
     userId: user,
     role: user.role,
   };
-  console.log('62', jwtPayload.role);
+  // console.log('62', jwtPayload.role);
   const accessToken = jwt.sign(
     jwtPayload,
     config.access_token_secret as Secret,
@@ -67,8 +68,22 @@ const loginUser = async (payload: TLoginUser) => {
       expiresIn: config.access_token_expires_in,
     },
   );
-  console.log('70', accessToken);
-  return { accessToken, needsPasswordChange: user?.needsPasswordChange };
+
+  // const accessToken=createToken(jwtPayload,config.access_token_secret,config.access_token_expires_in)
+  // console.log('70', accessToken);
+  const refreshToken = jwt.sign(
+    jwtPayload,
+    config.refresh_token_secret as Secret,
+    {
+      expiresIn: config.refresh_token_expires_in,
+    },
+  );
+  // console.log('70', accessToken);
+  return {
+    accessToken,
+    refreshToken,
+    needsPasswordChange: user?.needsPasswordChange,
+  };
 
   // console.log(accessToken);
 };
@@ -132,6 +147,7 @@ const changePassword = async (
       passwordChangedAt: new Date(),
     },
   );
+  console.log(result);
   return null;
 };
 

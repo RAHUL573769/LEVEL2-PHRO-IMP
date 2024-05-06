@@ -26,8 +26,5 @@ export interface UserModel extends Model<TUser> {
     jwtIssueTimeStamp: number,
   ): Promise<boolean>;
   isUserExistsByCustomId(id: string): Promise<TUser>;
-  isPasswordMatch(
-    plainTextPassword: string,
-    hashPassword: string,
-  ): Promise<boolean>;
+  isPasswordMatch(plainTextPassword: string, hashPassword: string): boolean;
 }
